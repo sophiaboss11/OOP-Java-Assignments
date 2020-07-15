@@ -1,104 +1,102 @@
 import java.util.Scanner;
-public class Main {
-   
-   public static void main(String[] args) {
+import java.io.*;
+/*
+reads input and outputs interest and prints details
+terminate program when the end of the file is reached 
+*/
+/*      
+concepts:   1. input ouput, enter file name + intro output
+           2. if statements calculating interest rates
+           3. determine codes, calculate with formula
+likely exception handling? terminate file when end is reached
+            sample input:              Joseph Kardian III
+                                       1500  4  a
+enter name, amount of money on deposit and a number of years it has been on deposit
+while input is valid
+   */
+public class main{
+   public static Scanner scnr = new Scanner(System.in);
+   public static void main(String[] args)throws IOException{
+      //print intro
+      System.out.println("              Program Number 1\n              Sophia Boss\n              Computer Science 3");
+////////////////////////////////////////////////////////////////////
 
-   					
-      double[] range = {0,112,115,118,122,126,130,135,140,147,154,160,167,174,183,189,198,209};
-      String [] weightClass = 
-    /* 0 */ {"Fly Weight",
-	/* 1 */"Super Fly Weight",
-    /* 2 */	  "Super Bantam Weight",
-    /* 3 */	  "Bantam Weight",
-    /* 4 */	  "Feather Weight",
-    /* 5 */	   "Super Feather Weight",
-    /* 6 */	   "Light Weight",
-    /* 7 */	   "Welter Weight",
-    /* 8 */		"Middle Weight",
-    /* 9 */		"Super Middle Weight",
-    /* 10 */	"Light Heavy Weight",
-    /* 11 */	"Super Light Heavy Weight",
-    /* 12 */     "Cruiser Weight",
-    /* 13 */     "Super Cruiser Weight", 
-    /* 14 */     "Heavy Weight",
-    /* 15 */     "Super Heavy Weight"};
+      //vars
+      //final int SIZE = 4;
+      int fileLength = 5;
+      
+      String[] namesArray = new String[fileLength] ; // needs size
+      double[] moneyArray = new double[fileLength];
+      int[] yearsArray = new int[fileLength];
+      String[] codeLetterArray = new String[fileLength];
 
-      /* Type your code here. */
-      //takes in weight from scanner
-      //organize weight according to the table
-      // if weight between range index 0-1, print weightclass index 0
-      //repeat for each name
-      
-      //System.out.println("Enter weight: ");
-      Scanner scnr = new Scanner(System.in);
-      double weight = scnr.nextDouble();
-      
-      if (weight < 0 ){
-         System.out.println("Invalid Input");  
-      }
-      
-      if (weight >= range[0] && weight <= range[1]){
-         System.out.println(weightClass[0]);  
-      }
-      if (weight >= range[2] && weight <= range[3]){
-         System.out.println(weightClass[1]);  
-      }
-      if (weight >= range[4] && weight <= range[5]){
-         System.out.println(weightClass[2]);  
-      }
-      if (weight >= range[6] && weight <= range[7]){
-         System.out.println(weightClass[3]);  
-      }
-      if (weight >= range[8] && weight <= range[9]){
-         System.out.println(weightClass[4]);  
-      }
-      if (weight >= range[10] && weight <= range[11]){
-         System.out.println(weightClass[5]);  
-      }
-      if (weight >= range[12] && weight <= range[13]){
-         System.out.println(weightClass[6]);  
-      }
-      if (weight >= range[14] && weight <= range[15]){
-         System.out.println(weightClass[7]);  
-      }
-      if (weight >= range[16] && weight <= range[17]){
-         System.out.println(weightClass[8]);  
-      }
-      if (weight >= range[18] && weight <= range[19]){
-         System.out.println(weightClass[9]);  
-      }
-      if (weight >= range[20] && weight <= range[21]){
-         System.out.println(weightClass[10]);  
-      }
-      if (weight >= range[22] && weight <= range[23]){
-         System.out.println(weightClass[11]);  
-      }
-      if (weight >= range[24] && weight <= range[25]){
-         System.out.println(weightClass[12]);  
-      }
-      if (weight >= range[26] && weight <= range[27]){
-         System.out.println(weightClass[13]);  
-      }
-      if (weight >= range[28] && weight <= range[29]){
-         System.out.println(weightClass[14]);  
-      }
-      if (weight >= range[30] && weight <= range[31]){
-         System.out.println(weightClass[15]);  
-      }
-      if (weight >= range[32] && weight <= range[33]){
-         System.out.println(weightClass[16]);  
-      }
-      if (weight >= range[34]){
-         System.out.println(weightClass[17]);  
-      }
-      else{
-         System.out.println("Invalid Input");  
-      }
-      
-      
-      
+     readFile(namesArray, moneyArray, yearsArray, codeLetterArray);
+      System.out.print(Arrays.toString(yearsArray));
+
 
       
-      
+// pathname    /Users/sophia/Desktop/phil_and_CS/Assignment_1/assign1CS3.txt
+// /Users/sophia/Desktop/phil_and_CS/Assignment_1/temp.txt
+
    }
+   public static Scanner openFile()throws IOException{
+
+      FileReader fileReader = null;
+      String fileName;
+      Scanner inSS;
+      File  input;
+      System.out.print("Enter a valid file name: ");
+
+     //read in file
+      fileName = scnr.nextLine();
+      System.out.print("you entered "+ fileName +"\n");
+      input = new File(fileName);
+
+      //check if empty file
+      if(!input.exists()){
+         System.out.println("There was no data in the file.  Program terminated.\n");
+         System.exit(0);
+      }
+      try{
+         inSS = new Scanner(input);
+         return inSS;
+      }
+      catch(IOException e){
+            System.out.println("Could not attach file.  Program terminated.\n"+e +"\n\n");
+            System.exit(0);
+      }
+      return null ;
+   }
+
+   public static int readFile(String []name, double[] money, int[] years, String[] codeLetter)throws IOException{
+      int i = 0;
+      Scanner inSS = openFile();
+      while(inSS.hasNext()){
+         name[i] = inSS.nextLine();
+         money[i] = inSS.nextDouble();
+         years[i] = inSS.nextInt();
+         codeLetter[i] = inSS.next();
+         i++;
+         if(!inSS.hasNext()){
+            System.out.println("\n array full \n");
+            break;
+         }
+         inSS.nextLine();
+      }
+      return i;
+   }
+      /*
+   public static int getLength()throws IOException{
+      Scanner in = openFile();
+      int length = 0;
+      while(in.hasNextDouble()){
+         length++;
+      }
+      return length;
+   }
+*/
+
+
+   
+
 }
