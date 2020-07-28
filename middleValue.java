@@ -3,10 +3,10 @@ import java.util.Scanner;
 public class middleValue {
    public static void main(String[] args) {
       Scanner scnr = new Scanner(System.in);
+      Scanner scnr2 = new Scanner(System.in);
       int[] userValues = new int[9];  // Set of data specified by the user      
-      /* loop that scans values     outputs index of length/2 */
-      int arrayLength = 0;
-      
+      int arrayLength = -1; 
+      /* loop that scans values     outputs index of length/2 */ 
       //find length
       String s = scnr.nextLine();
       for(int j = 0 ; j <= s.length() - 1; j++){
@@ -15,12 +15,11 @@ public class middleValue {
             arrayLength = arrayLength + 1;
          }
       }
-      //System.out.print(arrayLength);
       
       //read data into array
-      for(int i = 0 ; i < arrayLength ; ++i)
+      for(int i = 0 ; i < arrayLength ; i++)
       {
-         userValues[i] = scnr.nextInt();
+         userValues[i] = scnr2.nextInt();
       }       
 
       if(userValues.length <= 9){
