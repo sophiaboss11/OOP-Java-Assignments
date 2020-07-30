@@ -1,0 +1,8 @@
+John Smith
+100 90 78
+Nancy Brown
+100 100 100
+Allen Karlton
+90 78 99
+Steve Martin
+80 78 56

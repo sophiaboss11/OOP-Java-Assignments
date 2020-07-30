@@ -56,9 +56,15 @@ public class bankAccount{
         interest = getMoney() * Math.pow((1 + (r / n)), n * t);
         return interest ;
     }
+<<<<<<< HEAD
     // public double calcTotal(){
 
     // }
+=======
+    public double calcTotal(){
+
+    }
+>>>>>>> d29a7e203303b56b0c928ecc0b7a877cf535ab26
 
 }
 public class testAcc{
@@ -82,7 +88,11 @@ public class testAcc{
         System.out.println("enter annual interest rate; ");
         double rate = in.nextDouble();
 
+<<<<<<< HEAD
        System.out.println("interest; " + bank.calcInterest(rate)) ;
+=======
+        bank.calcInterest(rate);
+>>>>>>> d29a7e203303b56b0c928ecc0b7a877cf535ab26
         //that's how far i got :^)
 
     }

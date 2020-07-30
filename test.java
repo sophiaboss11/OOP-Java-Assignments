@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 public class test{
     public static void main(String args[]){
@@ -14,4 +15,15 @@ public class test{
 
         
     }
+=======
+//import java.util.Arrays;
+public class test{
+    public static void main(String args[]){
+
+        int[] arr = new int[10];
+
+        System.out.println("array: " + arr);
+
+	}
+>>>>>>> d29a7e203303b56b0c928ecc0b7a877cf535ab26
 }

@@ -61,7 +61,6 @@ public class PayrollList {
         }
         return i ;
     }
-    public static Scanner openFile()throws IOException{
         String  fileName;
         Scanner fin;
         File    input;
