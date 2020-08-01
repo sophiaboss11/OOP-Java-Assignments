@@ -6,8 +6,8 @@ class Item
 - String itemName
 -  double itemPrice
 - int itemQuality
-+Item() //constructor
-+Item(String, double, int)
++ Item() //constructor
++ Item(String, double, int)
 
 + void setItemName(String)
 + String getItemName()
@@ -18,28 +18,21 @@ class Item
 + toString()
 + equals()
 + print()
-
-UML Class ShoppingCart
-+ main()
-
-
 */
-
 
 class Item {
 	private String itemName;
 	private double itemPrice;
 	private int itemQuantity;
 	
-	Item() {
-		itemName = "none";
-		itemPrice = 0;
-		itemQuantity = 0;
-	}
-	
-	Item (String name, double price, int quantity) {
+	//accessors
+	void setItemName(String name) {
 		itemName = name;
+	}
+	void setItemPrice(double price) {
 		itemPrice = price;
+	}
+	void setItemQuantity(int quantity) {
 		itemQuantity = quantity;
 	}
 	
@@ -53,16 +46,7 @@ class Item {
 		return itemQuantity;
 	}
 	
-	void setItemName(String name) {
-		itemName = name;
-	}
-	void setItemPrice(double price) {
-		itemPrice = price;
-	}
-	void setItemQuantity(int quantity) {
-		itemQuantity = quantity;
-	}
-	
+	//print and compare
 	public String toString() {
 		return (itemName + " " + itemQuantity + " @ $" + itemPrice + " = $" + (itemQuantity * itemPrice));
 	}
@@ -73,4 +57,20 @@ class Item {
 	public Boolean equals(Item i) {
 		return ( (i.getItemName().equals(itemName)) && (i.getItemPrice() == itemPrice) && (i.getItemQuantity() == itemQuantity) );
 	}
+	//constructors
+	Item() {
+		itemName = "none";
+		itemPrice = 0;
+		itemQuantity = 0;
+	}
+	Item (String name, double price, int quantity) {
+		itemName = name;
+		itemPrice = price;
+		itemQuantity = quantity;
+	}
+
 }
+
+
+
+

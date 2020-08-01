@@ -28,20 +28,13 @@ class ShoppingCart {
 		int numItems = 1;
 		double total = 0;
 		
-		//System.out.println("Enter items here, type 'none' to stop. ");
 		while (true) {
-			//System.out.println("Item " + numItems);
-			
-			//System.out.println("Enter the item name:");
 			name = scnr.nextLine();
 			if (name.contentEquals("none")) {
 				break;
 			}
 			
-			//System.out.println("Enter the item price:");
 			price = scnr.nextDouble();
-			
-			//System.out.println("Enter the item quantity:");
 			quantity = scnr.nextInt();
 			
 			Item temp = new Item(name, price, quantity);
@@ -52,11 +45,14 @@ class ShoppingCart {
 
 			numItems++;
 		}
-		System.out.println("\ntest2");
+		
 		System.out.println("\nTOTAL COST");
 		for (int i = 0; i < numItems - 1; i++) {
 			items[i].print();
 		}
-		System.out.println("Total: $" + total);
+		System.out.println("\nTotal: $" + total);
 	}
 }
+
+
+
