@@ -8,8 +8,12 @@ main()
 readData()
 
 */
+// /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.txt
 import java.io.*;
 import java.util.Scanner;
+//import java.util.Arrays;
+import java.util.ArrayList;
+
 public class ManageStudent{
 
     //prompt user for file, read data into array of students
@@ -18,17 +22,29 @@ public class ManageStudent{
         
         System.out.println("enter valid file name: ");
         String fileName = in.nextLine();
-        String[] data = new String[20];
-        data = readData(fileName);
+        //read data into one array
+            ArrayList<String> data = new ArrayList<String>();
+            data = readData(fileName);
+
+        /*//test getCourseList()
+            String[] test1 = {" Smith Jr., Joe", "111-22-3333 3", "Physics I", "A 5", " English 1A", "B 4", " English 1B", "F 4"};
+            
+            x.getCourseList(test1);
+            */
+        
+            //System.out.println(Arrays.toString(data.toArray()));
+            Student x = new Student();
+            x.readStudent(data);
+
         
 
     }
 
-    public static String[] readData(String fName)throws IOException{
+    public static ArrayList<String> readData(String fName)throws IOException{
         File input = new File(fName);
         Scanner inSS;
         
-        String[] list = new String[20];
+        ArrayList<String> list = new ArrayList<String>();
         int i = 0;
 
         if(!input.exists()){
@@ -46,8 +62,8 @@ public class ManageStudent{
 
             //populate arrays
             while(inSS.hasNext()){
-                list[i] = inSS.nextLine();
-                System.out.println("> " + list[i]);
+                list.add(inSS.nextLine());
+                System.out.println("> " + list.get(i));
                 i++;
             }
 
@@ -60,5 +76,6 @@ public class ManageStudent{
 
     }
 
-    
+
+
 }
