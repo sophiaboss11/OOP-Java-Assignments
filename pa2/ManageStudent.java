@@ -26,14 +26,14 @@ public class ManageStudent{
             ArrayList<String> data = new ArrayList<String>();
             data = readData(fileName);
 
-        /*//test getCourseList()
-            String[] test1 = {" Smith Jr., Joe", "111-22-3333 3", "Physics I", "A 5", " English 1A", "B 4", " English 1B", "F 4"};
+        //test getCourseList()
+            // ArrayList<String> test1 = new ArrayList<String>(" Smith Jr., Joe", "111-22-3333 3", "Physics I", "A 5", " English 1A", "B 4", " English 1B", "F 4");
+            Student x = new Student();
+            // x.getCourseList(test1);
             
-            x.getCourseList(test1);
-            */
         
             //System.out.println(Arrays.toString(data.toArray()));
-            Student x = new Student();
+            
             x.readStudent(data);
 
         

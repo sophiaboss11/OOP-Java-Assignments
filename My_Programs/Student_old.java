@@ -28,16 +28,16 @@ public class Student{
     //only gets list for one student object
     public Course[] getCourseList(ArrayList<String> data){
         //int size = data.size() / 2;  //subtract by 2
-        int numCourses = (data.size() -2)/ 2;
-        Course[] courseArray = new Course[numCourses];
+        int size = (data.size() -2)/ 2;
+        Course[] courseArray = new Course[size];
         int count = 0;
 
-        for(int i = 0 ; i < numCourses ; i++ ){
+        for(int i = 2 ; i < data.size() ; i+=2 ){
 
-            String courseName = data.get(2*i + 2);
+            String courseName = data.get(i);
             //may need to delete whitespace
-            String grade = data.get(2*i+3).substring(0,1);
-            String units = data.get(2*i+3).substring(2,3);
+            String grade = data.get(i+1).substring(0,1);
+            String units = data.get(i+1).substring(2,3);
 
             //add course
             Course tempCourse = new Course(courseName, grade, units);
