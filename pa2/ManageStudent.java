@@ -9,34 +9,46 @@ readData()
 
 */
 // /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.txt
+// /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.2.txt
 import java.io.*;
 import java.util.Scanner;
-//import java.util.Arrays;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 public class ManageStudent{
-
-    //prompt user for file, read data into array of students
     public static Scanner in = new Scanner(System.in);
     public static void main(String args[])throws IOException{
-        
+        System.out.println("              Program Number 2\n              Sophia Boss\n              Computer Science 3");
+
+        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<String> ids = new ArrayList<String>();
+        ArrayList<Integer> unitsTaken = new ArrayList<Integer>();
+        //ArrayList<Integer> unitsCompleted = new ArrayList<Integer>();
+       // ArrayList<Integer> averages = new ArrayList<Integer>();
+    
         System.out.println("enter valid file name: ");
         String fileName = in.nextLine();
         //read data into one array
-            ArrayList<String> data = new ArrayList<String>();
-            data = readData(fileName);
-
-        //test getCourseList()
-            // ArrayList<String> test1 = new ArrayList<String>(" Smith Jr., Joe", "111-22-3333 3", "Physics I", "A 5", " English 1A", "B 4", " English 1B", "F 4");
+            ArrayList<String> data = readData(fileName);
+        //create array of students
             Student x = new Student();
-            // x.getCourseList(test1);
-            
-        
-            //System.out.println(Arrays.toString(data.toArray()));
-            
-            x.readStudent(data);
+            Student[] studentArray = x.readStudent(data);
+            System.out.println("student array: " + studentArray );
 
-        
+        //test process calculations
+             x.processCalculations(studentArray);
+             unitsTaken = x.getTotalUnitsArr();
+             System.out.println("units array: " + Arrays.toString(unitsTaken.toArray()));
+
+        // print values in a chart
+            System.out.println("\n\n\nName                Id              Units Taken       Units Completed     Average");
+            names = x.getNamesList();
+            ids = x.getIdsList();
+            int i = 0;
+            while(i < names.size() ){
+                System.out.printf("%-20s%-20s%-20d%n", names.get(i), ids.get(i), unitsTaken.get(i)  );
+                i++;
+            }
 
     }
 
@@ -73,6 +85,7 @@ public class ManageStudent{
             System.exit(0);
         }
         return list;
+        //yData = list;
 
     }
 
