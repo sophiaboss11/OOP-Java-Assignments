@@ -56,15 +56,12 @@ public class Course{
     public int calcNumUnits(Student obj){
         int tUnits = 0;
         Course[] courseList = obj.getCourseList();
-        System.out.println("course list: " + courseList.toString() );
+        System.out.println("course list: " + courseList.toString() + "length is " + courseList.length );
 
         for(int i = 0 ; i < courseList.length ; i++){
             int unit = Integer.parseInt(courseList[i].getUnits());
             tUnits+= unit;
-            //temp solution
-            if( i == courseList.length -1 ){
-                tUnits += 1;
-            }
+
         }
 
 

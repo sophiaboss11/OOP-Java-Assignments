@@ -10,6 +10,7 @@ readData()
 */
 // /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.txt
 // /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.2.txt
+// D:\Documents D\CSCI_3_Assignments\pa2\lab5 2.txt
 import java.io.*;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -52,6 +53,7 @@ public class ManageStudent{
 
     }
 
+    //something in here that is off
     public static ArrayList<String> readData(String fName)throws IOException{
         File input = new File(fName);
         Scanner inSS;

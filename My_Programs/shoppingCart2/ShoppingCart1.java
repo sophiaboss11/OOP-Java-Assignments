@@ -33,6 +33,9 @@ public class ShoppingCart1 {
         customerName = name;
         this.currentDate = currentDate;
     }
+    public ArrayList<Item1> getCartItems(){
+        return cartItems;
+    }
     void addItem(Item1 i1){
         if (i1 != null)
             cartItems.add(i1);

@@ -21,9 +21,7 @@ public class Student{
     private ArrayList<String> unitsList = new ArrayList<String>();
     private ArrayList<Integer> indexNamesArr = new ArrayList<Integer>();
     private ArrayList<Integer> totalUnitsArr = new ArrayList<Integer>();
-    //private ArrayList<String> fullList = new ArrayList<String>();
     private ArrayList<Integer> numClassesList = new ArrayList<Integer>();
-    //public ArrayList<String> myData = new ArrayList<String>();
 
     public void readData(String fName)throws IOException{
         File input = new File(fName);
@@ -42,6 +40,7 @@ public class Student{
                 System.exit(0);
             }
 
+            ArrayList<String> section = new ArrayList<String>();
             //populate arrays
             while(inSS.hasNext()){
                // fullList.add(inSS.nextLine());
@@ -55,7 +54,7 @@ public class Student{
                     int numClasses = inSS.nextInt();
                     numClassesList.add(numClasses);
 
-                    ArrayList<String> section = new ArrayList<String>();
+                    
                     for(int j = 0 ; j < numClasses * 2 ; j ++){
                         section.add(inSS.nextLine());
                     }
@@ -71,11 +70,6 @@ public class Student{
             System.exit(0);
         }
     }
-
-
-
-
-
 
     
     public void setCourseList(ArrayList<String> data){

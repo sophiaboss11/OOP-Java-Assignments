@@ -63,6 +63,8 @@ public class Student{
                 indexarr.add(i);     
             }
         }
+        //indexarr.set(indexarr.size() - 1, indexarr.get(indexarr.size() - 1) + 1) ;
+
         System.out.println("\nindexarr: " + Arrays.toString(indexarr.toArray()) + "\n\n");
         indexNamesArr = indexarr;
         Student[] students = new Student[indexarr.size()];
@@ -79,11 +81,15 @@ public class Student{
                 System.out.println(">new student\n" + "Name: " + name + " ID: " + id);
 
             //while in the same section, add to it > exits when reaches next name
-            while(!data.get(x).equals( data.get( indexarr.get(j+1) ) )){
+            //while(!data.get(x).equals( data.get( indexarr.get(j+1) ) ) && j == ){
+            while( x != indexarr.get(j+1)){
                 section.add(data.get(x));
                 x++;
             }
-
+            if(x == data.size() - 1){
+                section.add(data.get(x));
+            }
+ 
             System.out.println("section: " + Arrays.toString(section.toArray()) + "\n");
 
             //course list for student
@@ -102,7 +108,7 @@ public class Student{
             //test calcNumUnits
             System.out.println("\n\nnumber units for student: " + myCourse.calcNumUnits( studentArray[i]) );
 
-            totalUnitsArr.add(myCourse.calcNumUnits(studentArray[i]));
+            totalUnitsArr.add(myCourse.calcNumUnits( studentArray[i] ));
         }
     }
 
