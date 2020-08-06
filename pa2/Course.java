@@ -56,20 +56,62 @@ public class Course{
     public int calcNumUnits(Student obj){
         int tUnits = 0;
         Course[] courseList = obj.getCourseList();
-        System.out.println("course list: " + courseList.toString() + "length is " + courseList.length );
-
         for(int i = 0 ; i < courseList.length ; i++){
             int unit = Integer.parseInt(courseList[i].getUnits());
             tUnits+= unit;
 
         }
-
-
         return tUnits;
+    }
+
+    //calculate number of units completed   
+    public int calcUnitsCompleted(Student obj){
+        int cUnits = 0;
+        Course[] courseList = obj.getCourseList();
+
+        for(int i = 0 ; i < courseList.length ; i++){
+
+            if(!courseList[i].getGrade().equalsIgnoreCase("f")){
+                int unit = Integer.parseInt(courseList[i].getUnits());
+                cUnits += unit;
+            }
+        }
+        return cUnits;
+        
     }
 
 
     //calculate gpa
+    public Double calcGpa(Student obj){
+        Double gpa = 0.0;
+        int tUnits = 0;
+        Course[] courseList = obj.getCourseList();
+        for(int i = 0 ; i < courseList.length ; i++){
+            int unit = Integer.parseInt(courseList[i].getUnits());
+            tUnits+= unit;
+
+            int points = 0;
+            if(courseList[i].getGrade().equals("A")){
+                points = 4;
+            }
+            else if(courseList[i].getGrade().equals("B")){
+                points = 3;
+            }
+            else if(courseList[i].getGrade().equals("C")){
+                points = 2;
+            }
+            else if(courseList[i].getGrade().equals("D")){
+                points = 1;
+            }
+            else if(courseList[i].getGrade().equals("F")){
+                points = 0;
+            }
+            gpa += Double.parseDouble(courseList[i].getUnits()) * points;
+        }
+        gpa /= tUnits;
+
+        return gpa;
+    }
 
 
     //print information

@@ -54,7 +54,7 @@ public class DateParser {
 
       // TODO: Read dates from input, parse the dates to find the one
       //       in the correct format, and output in m/d/yyyy format
-        while(scnr.hasNextLine()){
+        while(scnr.hasNext()){
             String month = scnr.next();
             String day = scnr.next();
             int day2;

@@ -16,9 +16,8 @@
 +  setName(String): void
 +  setDate(String): void 
 +  printBill(): void
-
  */
-//package shoppingcart;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 public class ShoppingCart1 {
@@ -72,6 +71,8 @@ public class ShoppingCart1 {
         obj.setPrice(in.nextDouble());
         System.out.println("enter new quantity: ");
         obj.setQuantity(in.nextInt());
+
+        in.close();
 
     }
     void printBill(){

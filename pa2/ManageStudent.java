@@ -9,11 +9,10 @@ readData()
 
 */
 // /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.txt
-// /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.2.txt
+// /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5 2.txt
 // D:\Documents D\CSCI_3_Assignments\pa2\lab5 2.txt
 import java.io.*;
 import java.util.Scanner;
-import java.util.Arrays;
 import java.util.ArrayList;
 
 public class ManageStudent{
@@ -24,8 +23,8 @@ public class ManageStudent{
         ArrayList<String> names = new ArrayList<String>();
         ArrayList<String> ids = new ArrayList<String>();
         ArrayList<Integer> unitsTaken = new ArrayList<Integer>();
-        //ArrayList<Integer> unitsCompleted = new ArrayList<Integer>();
-       // ArrayList<Integer> averages = new ArrayList<Integer>();
+        ArrayList<Integer> unitsCompleted = new ArrayList<Integer>();
+        ArrayList<Double> averages = new ArrayList<Double>();
     
         System.out.println("enter valid file name: ");
         String fileName = in.nextLine();
@@ -34,22 +33,24 @@ public class ManageStudent{
         //create array of students
             Student x = new Student();
             Student[] studentArray = x.readStudent(data);
-            System.out.println("student array: " + studentArray );
+           // System.out.println("student array: " + studentArray );
 
         //test process calculations
              x.processCalculations(studentArray);
              unitsTaken = x.getTotalUnitsArr();
-             System.out.println("units array: " + Arrays.toString(unitsTaken.toArray()));
+             unitsCompleted = x.getCompletedUnitsArr();
+             averages = x.getGpaArr();
 
         // print values in a chart
-            System.out.println("\n\n\nName                Id              Units Taken       Units Completed     Average");
+            System.out.println("\n\nName                Id                  Units Taken         Units Completed     Average");
             names = x.getNamesList();
             ids = x.getIdsList();
             int i = 0;
             while(i < names.size() ){
-                System.out.printf("%-20s%-20s%-20d%n", names.get(i), ids.get(i), unitsTaken.get(i)  );
+                System.out.printf("%-20s%-20s%-20d%-20d%-20.2f%n", names.get(i), ids.get(i), unitsTaken.get(i), unitsCompleted.get(i), averages.get(i) );
                 i++;
             }
+            System.out.println("Total number of Students: " + studentArray.length + "\n" + "Total Units completed by all students: " + )
 
     }
 
@@ -87,8 +88,6 @@ public class ManageStudent{
             System.exit(0);
         }
         return list;
-        //yData = list;
-
     }
 
 

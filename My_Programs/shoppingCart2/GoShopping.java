@@ -1,12 +1,25 @@
+/*
+-- UML --
+class GoShopping
+
++ Scanner 
++ Boolean
++ ShoppingCart 1
+
++ main()
++ menu()
++ ask()
++ askAdd()
++ askRemove()
+*/
 import java.util.Scanner;
 
 public class GoShopping{
     public static Scanner in = new Scanner(System.in);
     public static Boolean isTrue = true;
     public static ShoppingCart1 sc = new ShoppingCart1();
+
     public static void main(String args[]){
-
-
         try {
             System.out.println("Enter your name");
             sc.setName(in.nextLine());
@@ -14,36 +27,76 @@ public class GoShopping{
             sc.setDate(in.nextLine());
             System.out.print("Name and date added. ");
 
-            while(isTrue){
-                System.out.println("would you like to add or remove item? Answer add, remove or no.");
-                String answer = in.next();
-                if(answer.equalsIgnoreCase("add")){
-                    askAdd();
-                    continue;
-                }
-                if(answer.equalsIgnoreCase("remove")){
-                    askRemove();
-                    continue;
-                } 
-                if(answer.equalsIgnoreCase("no")){
-                    break;
-                } 
-                else{
-                    System.out.println("bad input");
-                    break;
-                }       
-            }
-            //in.close();
 
-            System.out.println("-- Thank you for shopping -- ");
-            sc.printBill();
-        }
+            menu();  
+
+        } 
         catch(Exception e){
             System.out.println("invalid input");
             System.exit(0);
         }
-        in.close();
+    }
 
+    public static void menu(){
+        
+        boolean is =  true;
+        while(is){
+
+            ask();
+            askRemove();
+            readItem();
+
+            System.out.println("Would you like to continue? Answer yes or no.");
+            String answer = in.nextLine();
+            if(answer.equals("yes")){
+                continue;
+            }
+            if(answer.equals("no")){
+                System.out.println("--Thank you for shopping-- \n");
+                is = false;
+            }
+        }
+        sc.printBill();
+    }
+
+    public static void readItem(){
+        System.out.println("Would you like to inspect an item? Type item name or no.");
+        String itemName = in.nextLine();
+        boolean hasItem = false;
+        if(itemName.equals("no")){
+            System.out.println("quitting section");
+            return;
+        }
+        for(int i = 0 ; i < sc.getNumOfItems() ; i++){
+            if(sc.getCartItems().get(i).getName().equals(itemName)){
+                System.out.println("printing Item information");
+                sc.getCartItems().get(i).printInfo();
+                System.out.println("\n");
+                hasItem = true;
+            }
+        }
+        if(hasItem = false){
+            System.out.println("invalid item name");
+        }
+    }
+
+    public static void ask(){
+        while(isTrue){
+            System.out.println("would you like to add an item? Answer yes or no.");
+            String answer = in.nextLine();
+            if( answer.equalsIgnoreCase("yes")){
+                askAdd();
+                continue;
+            }
+            if(answer.equalsIgnoreCase("no")){
+                System.out.println("quitting section ");
+                isTrue = false;
+            } 
+            else{
+                System.out.println("bad input");
+                break;
+            }       
+        }
     }
 
     public static void askAdd(){
@@ -52,6 +105,7 @@ public class GoShopping{
         String itemName = in.next();
         double itemPrice = in.nextDouble();
         int itemQuantity = in.nextInt();
+        in.nextLine();
 
         Item1 item = new Item1(itemName, itemPrice, itemQuantity);
         sc.addItem(item);
@@ -59,34 +113,23 @@ public class GoShopping{
     }
 
     public static void askRemove(){
-        //Scanner scnr = new Scanner(System.in);
-        while(isTrue){
-            // System.out.println("Would you like to remove an item? Answer y or n.");
-            // String answer2 = in.next();
-            // if(answer2.equalsIgnoreCase("y")){
-                System.out.println("What is the name of the item you would like to remove?");
-                String itemName = in.nextLine();
-                for(int i = 0 ; i < sc.getNumOfItems() ; i++){
-                    if(sc.getCartItems().get(i).getName().equals(itemName)){
-                        sc.removeItem( sc.getCartItems().get(i) );
-                        System.out.println(itemName + " was removed");
-                    }
-                    else{
-                        System.out.println("invalid item name, try again");
-                        continue;
-                    }
-                }
-                in.close();
-
-            // }
-            // if(answer2.equalsIgnoreCase("n")){
-            //     break;
-            // } 
-            // else{
-            //     System.out.println("bad input");
-            //    // isTrue = false;
-            //     break;
-            // } 
+        in.nextLine();
+        System.out.println("Would you like to remove an item? Enter item name or no.");
+        String itemName = in.nextLine();
+        boolean hasItem = false;
+        if(itemName.equals("no")){
+            System.out.println("quitting section ");
+            return;
+        }
+        for(int i = 0 ; i < sc.getNumOfItems() ; i++){
+            if(sc.getCartItems().get(i).getName().equals(itemName)){
+                sc.removeItem( sc.getCartItems().get(i) );
+                System.out.println(itemName + " was removed");
+                hasItem = true;
+            }
+        }
+        if(hasItem = false){
+            System.out.println("invalid item name");
         }
     }
 

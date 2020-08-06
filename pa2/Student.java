@@ -19,8 +19,10 @@ public class Student{
     public ArrayList<String> unitsList = new ArrayList<String>();
     public ArrayList<Integer> indexNamesArr = new ArrayList<Integer>();
     public ArrayList<Integer> totalUnitsArr = new ArrayList<Integer>();
-    //public ArrayList<String> myData = new ArrayList<String>();
-
+    public ArrayList<Integer> completedUnitsArr = new ArrayList<Integer>();
+    public ArrayList<Double> gpaArr = new ArrayList<Double>();
+    int totalUnitsTaken;
+    int totalUnitsCompleted;
     
     public void setCourseList(ArrayList<String> data){
         int numCourses = (data.size() -2)/ 2;
@@ -51,8 +53,7 @@ public class Student{
     public ArrayList<String> getUnitsList(){
         return unitsList;
     }
-    
-    
+      
     public Student[] readStudent(ArrayList<String> data){
         
         ArrayList<Integer> indexarr = new ArrayList<Integer>();
@@ -63,9 +64,6 @@ public class Student{
                 indexarr.add(i);     
             }
         }
-        //indexarr.set(indexarr.size() - 1, indexarr.get(indexarr.size() - 1) + 1) ;
-
-        System.out.println("\nindexarr: " + Arrays.toString(indexarr.toArray()) + "\n\n");
         indexNamesArr = indexarr;
         Student[] students = new Student[indexarr.size()];
   
@@ -73,15 +71,13 @@ public class Student{
         int x = 0;
         for(int j = 0 ; j < indexarr.size() - 1 ; j++){
             name = data.get( indexarr.get(j) );
-            id = data.get(indexarr.get(j) + 1 );
+            id = data.get(indexarr.get(j) + 1 ).substring(0, data.get(indexarr.get(j) + 1 ).length() - 2);
             namesList.add(name);
             idsList.add(id);
 
             ArrayList<String> section = new ArrayList<String>();
-                System.out.println(">new student\n" + "Name: " + name + " ID: " + id);
 
             //while in the same section, add to it > exits when reaches next name
-            //while(!data.get(x).equals( data.get( indexarr.get(j+1) ) ) && j == ){
             while( x != indexarr.get(j+1)){
                 section.add(data.get(x));
                 x++;
@@ -109,7 +105,26 @@ public class Student{
             System.out.println("\n\nnumber units for student: " + myCourse.calcNumUnits( studentArray[i]) );
 
             totalUnitsArr.add(myCourse.calcNumUnits( studentArray[i] ));
+
+            //test calcUnitsCompleted
+            System.out.println("\ncompleted units for student: " + myCourse.calcUnitsCompleted( studentArray[i]) );
+
+            completedUnitsArr.add(myCourse.calcUnitsCompleted( studentArray[i] ));
+
+            //test calcGpa
+            gpaArr.add(myCourse.calcGpa(studentArray[i]));
+
+
         }
+    }
+    public int getTotalUnitsTaken(){
+        return totalUnitsTaken;
+    }
+    public int getTotalUnitsCompleted(){
+        return totalUnitsCompleted;
+    }
+    public ArrayList<Double> getGpaArr(){
+        return gpaArr;
     }
 
     public ArrayList<Integer> getIndexArr(){
@@ -118,6 +133,10 @@ public class Student{
 
     public ArrayList<Integer> getTotalUnitsArr(){
         return totalUnitsArr;
+    }
+
+    public ArrayList<Integer> getCompletedUnitsArr(){
+        return completedUnitsArr;
     }
 
     public ArrayList<String> getNamesList(){

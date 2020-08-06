@@ -20,7 +20,7 @@
 | + public printItemCost():void
 |-----------------------------------
 */
-//package shoppingcart;
+
 public class Item1 {
     private String itemName ;
     private double itemPrice ;
