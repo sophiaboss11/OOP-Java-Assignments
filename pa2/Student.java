@@ -1,34 +1,69 @@
 /*
-UML Student.java
+--- UML ---
++ class Student
 
-    String name -- first, last
-    String id
-    String[] CourseList
-Student(string name, string id, string[] courses) // constructor
+- String name
+- String id
+- int totalUnitsTaken
+- int totalUnitsCompleted
+- Course[] courseList
+- Course myCourse
+- ArrayList<String> namesList
+- ArrayList<String> idsList
+- ArrayList<String> unitsList
+- ArrayList<Integer> indexNamesArr
+- ArrayList<Integer> totalUnitsArr
+- ArrayList<Integer> completedUnitsArr
+- ArrayList<Double> gpaArr
+
++ void setCourseList(ArrayList<String> data)
++ Student[] readStudent(ArrayList<String> data)
++ void processCalculations(Student[] studentArray)
++ Course[] getCourseList()
++ ArrayList<String> getUnitsList()
++ int getTotalUnitsTaken()
++ int getTotalUnitsCompleted()
++ ArrayList<Double> getGpaArr()
++ ArrayList<Integer> getIndexArr()
++ ArrayList<Integer> getTotalUnitsArr()
++ ArrayList<Integer> getCompletedUnitsArr()
++ ArrayList<String> getNamesList()
++ ArrayList<String> getIdsList()
++ void setName(String myName)
++ String getName()
++ void setId(String myId)
++ String getId()
+  Student() // empty constructor
+  Student(String sName, String sId, Course[] sCourses) // loaded constructor
 
 */
-import java.util.Arrays;
+
+
 import java.util.ArrayList;
 
 public class Student{
-    private String name, id = "";
-    Course[] courseList;
-    Course myCourse = new Course();
-    public ArrayList<String> namesList = new ArrayList<String>();
-    public ArrayList<String> idsList = new ArrayList<String>();
-    public ArrayList<String> unitsList = new ArrayList<String>();
-    public ArrayList<Integer> indexNamesArr = new ArrayList<Integer>();
-    public ArrayList<Integer> totalUnitsArr = new ArrayList<Integer>();
-    public ArrayList<Integer> completedUnitsArr = new ArrayList<Integer>();
-    public ArrayList<Double> gpaArr = new ArrayList<Double>();
-    int totalUnitsTaken;
-    int totalUnitsCompleted;
+    //fields
+    private String name, lastName, id = "";
+    private int totalUnitsTaken;
+    private int totalUnitsCompleted;
+    private Course[] courseList;
+    private Double average;
+    private Course myCourse = new Course();
+    private ArrayList<String> namesList = new ArrayList<String>();
+    private ArrayList<String> lastNamesList = new ArrayList<String>();
+    private ArrayList<String> idsList = new ArrayList<String>();
+    private ArrayList<String> unitsList = new ArrayList<String>();
+    private ArrayList<Integer> indexNamesArr = new ArrayList<Integer>();
+    private ArrayList<Integer> totalUnitsArr = new ArrayList<Integer>();
+    private ArrayList<Integer> completedUnitsArr = new ArrayList<Integer>();
+    private ArrayList<Double> gpaArr = new ArrayList<Double>();
+
     
+    //mutator methods
     public void setCourseList(ArrayList<String> data){
         int numCourses = (data.size() -2)/ 2;
         Course[] courseArray = new Course[numCourses];
         int count = 0;
-        //myData = data;
 
         for(int i = 0 ; i < numCourses ; i++ ){
 
@@ -45,13 +80,6 @@ public class Student{
             count++;
         }
         courseList = courseArray;
-    }
-
-    public Course[] getCourseList(){
-        return courseList;
-    }
-    public ArrayList<String> getUnitsList(){
-        return unitsList;
     }
       
     public Student[] readStudent(ArrayList<String> data){
@@ -70,9 +98,14 @@ public class Student{
         //create sections of data
         int x = 0;
         for(int j = 0 ; j < indexarr.size() - 1 ; j++){
-            name = data.get( indexarr.get(j) );
+            name = data.get( indexarr.get(j) ).substring(data.get( indexarr.get(j) ).indexOf(",") + 2, data.get( indexarr.get(j) ).length() );
+
+            lastName = data.get( indexarr.get(j) ).substring(0, data.get( indexarr.get(j) ).indexOf(",") );
+
             id = data.get(indexarr.get(j) + 1 ).substring(0, data.get(indexarr.get(j) + 1 ).length() - 2);
+
             namesList.add(name);
+            lastNamesList.add(lastName);
             idsList.add(id);
 
             ArrayList<String> section = new ArrayList<String>();
@@ -86,36 +119,34 @@ public class Student{
                 section.add(data.get(x));
             }
  
-            System.out.println("section: " + Arrays.toString(section.toArray()) + "\n");
-
             //course list for student
             setCourseList( section );
             Course[] tempCourseList = getCourseList();
             Student tempStudent = new Student(name, id, tempCourseList);
             students[j] = tempStudent;
-            System.out.println("tempstudent: " + tempStudent + "\n");
         }
         return students;
     }
 
     public void processCalculations(Student[] studentArray){
         for(int  i = 0 ; i < studentArray.length - 1 ; i++){
-
-            //test calcNumUnits
-            System.out.println("\n\nnumber units for student: " + myCourse.calcNumUnits( studentArray[i]) );
-
+            //calcNumUnits
             totalUnitsArr.add(myCourse.calcNumUnits( studentArray[i] ));
 
-            //test calcUnitsCompleted
-            System.out.println("\ncompleted units for student: " + myCourse.calcUnitsCompleted( studentArray[i]) );
-
+            //calcUnitsCompleted
             completedUnitsArr.add(myCourse.calcUnitsCompleted( studentArray[i] ));
 
-            //test calcGpa
+            // calcGpa
             gpaArr.add(myCourse.calcGpa(studentArray[i]));
-
-
         }
+    }
+
+    //accessor methods
+    public Course[] getCourseList(){
+        return courseList;
+    }
+    public ArrayList<String> getUnitsList(){
+        return unitsList;
     }
     public int getTotalUnitsTaken(){
         return totalUnitsTaken;
@@ -126,41 +157,24 @@ public class Student{
     public ArrayList<Double> getGpaArr(){
         return gpaArr;
     }
-
     public ArrayList<Integer> getIndexArr(){
         return indexNamesArr;
     }
-
     public ArrayList<Integer> getTotalUnitsArr(){
         return totalUnitsArr;
     }
-
     public ArrayList<Integer> getCompletedUnitsArr(){
         return completedUnitsArr;
     }
-
     public ArrayList<String> getNamesList(){
         return namesList;
     }
-
+    public ArrayList<String> getLastNamesList(){
+        return lastNamesList;
+    }
     public ArrayList<String> getIdsList(){
         return idsList;
     }
-
-
-    //constructors
-    Student(String sName, String sId, Course[] sCourses){
-        name = sName;
-        id = sId;
-        courseList = sCourses;
-    }
-    Student(){
-        name = null;
-        id = null;
-        courseList = null;
-    }
-
-    //accessor methods
     public void setName(String myName){
         name = myName;
     }
@@ -173,6 +187,20 @@ public class Student{
     public String getId(){
         return id;
     }
+    public double getAverage(){
+        return average;
+    }
 
+    //constructors
+    Student(String sName, String sId, Course[] sCourses){
+        name = sName;
+        id = sId;
+        courseList = sCourses;
+    }
+    Student(){
+        name = null;
+        id = null;
+        courseList = null;
+    }
 
 }

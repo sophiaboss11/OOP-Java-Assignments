@@ -1,0 +1,9 @@
+
+
+Name                Id                  Units Taken         Units Completed     Average
+Joe Smith Jr.       111-22-3333         13                  9                   2.46                
+Bill Jones          111-11-1111         15                  15                  3.60                
+
+Total number of Students: 2
+Total Units completed by all students: 24
+Total Units taken by all students: 28

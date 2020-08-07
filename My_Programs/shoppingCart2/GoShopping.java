@@ -48,10 +48,8 @@ public class GoShopping{
 
             System.out.println("Would you like to continue? Answer yes or no.");
             String answer = in.nextLine();
-            if(answer.equals("yes")){
-                continue;
-            }
-            if(answer.equals("no")){
+
+            if(!answer.equals("yes")){
                 System.out.println("--Thank you for shopping-- \n");
                 is = false;
             }
@@ -87,15 +85,16 @@ public class GoShopping{
             if( answer.equalsIgnoreCase("yes")){
                 askAdd();
                 continue;
+            } else {
+	            if(answer.equalsIgnoreCase("no")){
+	                System.out.println("quitting section ");
+	                isTrue = false;
+	            } 
+	            else{
+	                System.out.println("bad input");
+	                break;
+	            }       
             }
-            if(answer.equalsIgnoreCase("no")){
-                System.out.println("quitting section ");
-                isTrue = false;
-            } 
-            else{
-                System.out.println("bad input");
-                break;
-            }       
         }
     }
 

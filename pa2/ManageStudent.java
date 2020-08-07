@@ -1,16 +1,23 @@
 /*
-UML ManageStudent.java
+--- UML ---
++ class ManageStudent
 
-Scanner in
-String[] students
++ Scanner in
++ String[] students
 
-main()
-readData()
++ main()
++ readData()
+
+my file paths
+/Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.txt
+/Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5 2.txt
+D:\Documents D\CSCI_3_Assignments\pa2\lab5 2.txt
+
+output path
+/Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/studentOutputFile.txt
 
 */
-// /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5.txt
-// /Users/sophia/Documents/GitHub/CSCI_3_Assignments/pa2/lab5 2.txt
-// D:\Documents D\CSCI_3_Assignments\pa2\lab5 2.txt
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -18,49 +25,40 @@ import java.util.ArrayList;
 public class ManageStudent{
     public static Scanner in = new Scanner(System.in);
     public static void main(String args[])throws IOException{
-        System.out.println("              Program Number 2\n              Sophia Boss\n              Computer Science 3");
-
         ArrayList<String> names = new ArrayList<String>();
         ArrayList<String> ids = new ArrayList<String>();
         ArrayList<Integer> unitsTaken = new ArrayList<Integer>();
         ArrayList<Integer> unitsCompleted = new ArrayList<Integer>();
         ArrayList<Double> averages = new ArrayList<Double>();
+        ArrayList<String> lastNames = new ArrayList<String>();
+        Course c = new Course();
+
+        //print title
+        System.out.println("\n              Program Number 2\n              Sophia Boss\n              Computer Science 3\n");
     
+        //read data into array and create an array of students
         System.out.println("enter valid file name: ");
         String fileName = in.nextLine();
-        //read data into one array
-            ArrayList<String> data = readData(fileName);
-        //create array of students
-            Student x = new Student();
-            Student[] studentArray = x.readStudent(data);
-           // System.out.println("student array: " + studentArray );
+        ArrayList<String> data = readData(fileName);
+        Student x = new Student();
+        Student[] studentArray = x.readStudent(data);
 
-        //test process calculations
-             x.processCalculations(studentArray);
-             unitsTaken = x.getTotalUnitsArr();
-             unitsCompleted = x.getCompletedUnitsArr();
-             averages = x.getGpaArr();
+        //**** output information    > had to comment out for zybooks submission
+        // c.output(names, lastNames, ids, unitsTaken, unitsCompleted, averages, studentArray, x);
+           
+        // print information
+        c.print(names, lastNames, ids, unitsTaken, unitsCompleted, averages, studentArray, x);
 
-        // print values in a chart
-            System.out.println("\n\nName                Id                  Units Taken         Units Completed     Average");
-            names = x.getNamesList();
-            ids = x.getIdsList();
-            int i = 0;
-            while(i < names.size() ){
-                System.out.printf("%-20s%-20s%-20d%-20d%-20.2f%n", names.get(i), ids.get(i), unitsTaken.get(i), unitsCompleted.get(i), averages.get(i) );
-                i++;
-            }
-            System.out.println("Total number of Students: " + studentArray.length + "\n" + "Total Units completed by all students: " + )
-
+        
     }
 
-    //something in here that is off
+
+
     public static ArrayList<String> readData(String fName)throws IOException{
         File input = new File(fName);
         Scanner inSS;
         
-        ArrayList<String> list = new ArrayList<String>();
-        int i = 0;
+        ArrayList<String> listOfData = new ArrayList<String>();
 
         if(!input.exists()){
             System.out.println("file does not exist, exiting");
@@ -68,8 +66,6 @@ public class ManageStudent{
         }
         try{
             inSS = new Scanner(input);
-            //return inSS-- come back here
-            //check if empty
             if(!inSS.hasNext()){
                 System.out.println("no data in file, exiting");
                 System.exit(0);
@@ -77,9 +73,7 @@ public class ManageStudent{
 
             //populate arrays
             while(inSS.hasNext()){
-                list.add(inSS.nextLine());
-                System.out.println("> " + list.get(i));
-                i++;
+                listOfData.add(inSS.nextLine());
             }
 
         }
@@ -87,7 +81,7 @@ public class ManageStudent{
             System.out.println("Could not attatch file, exiting");
             System.exit(0);
         }
-        return list;
+        return listOfData;
     }
 
 
