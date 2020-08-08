@@ -14,65 +14,170 @@ arraylist getGrades()
 
 print()
 */
+
+import java.util.Scanner;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Student2{
-    String name, id = "";
+    String name;
+    int numStudents, totalSize, id;
     Course2[] courses = null;
     Student2[] allStudents = null;
+    ArrayList<String> lastNames = new ArrayList<String>();
+    ArrayList<String> firstNames = new ArrayList<String>();
+    ArrayList<String> courseNames = new ArrayList<String>();
+    ArrayList<String> grades = new ArrayList<String>();
+    ArrayList<Integer> ids = new ArrayList<>();
+    ArrayList<Integer> courseCount = new ArrayList<>();
+    ArrayList<Integer> units = new ArrayList<>();
 
-    Student2(String nam, String myid, Course2[] cList){
+
+    Student2(String nam, int myid, Course2[] cList){
         name = nam;
         id = myid;
         courses = cList;
     }
     Student2(){
         name = null;
-        id = null;
+        id = 0;
         courses = null;
     }
 
-    public Student2[] readCourses(ArrayList<String> myData){
-        ArrayList<String> sNames = new ArrayList<String>();
-        ArrayList<String> sIds = new ArrayList<String>();
-        ArrayList<Integer> ind = new ArrayList<Integer>();
-        
-        //populate index array
-        for(int i = 0 ; i < myData.size() ; i++){
-            if(myData.get(i).contains(",")){
-                ind.add(i);
-                sNames.add(myData.get(i));
-                sIds.add(myData.get(i + 1));
-            }
-            else if( i == myData.size() - 1){
-                ind.add(i + 2);
-            }
-        }
-        Student2[] students = new Student2[ind.size()];
-    //loop through input, for every class, create a new course, set the name, grade, and units, and then add it to the courselist
-        int x = 0;
-        for(int j = 0 ; j < ind.size() ; j++){
-            Course2[] courseList = new Course2[(ind.get(j+1)) - ind.get(j) - 2];
-            while(!myData.get(x).equals( myData.get(ind.get(j + 1)) )){
-                //create new course
-                
-                Course2 tempCourse = new Course2();
-                tempCourse.setCourseName( myData.get(x*2 + 2) );
-                tempCourse.setGrade( myData.get(x*2 + 3).substring(0,1) );
-                tempCourse.setUnits( Integer.parseInt(myData.get(x*2 + 3).substring(2,3) ));
-                courseList[j] = tempCourse;
+    void setStudentArray(){
+        Student2[] allMyStudents = new Student2[firstNames.size()];
+        for(int i = 0 ; i < firstNames.size() ; i++){
+            Student2 tempstudent = new Student2();
+            String fullname = firstNames.get(i) + "--" + lastNames.get(i);
+            tempstudent.setName(fullname);
+            tempstudent.setId(ids.get(i));
+            //tempstudent.setcc(courseCount.get(i));
+            int ccc = courseCount.get(i);
+
+            Course2[] tempca = new Course2[ccc];
+            int x = 0;
+            for(int j = 0 ; j < ccc ; j++){
+                Course2 tempcourse = new Course2();
+                tempcourse.setCourseName(courseNames.get(x));
+                tempcourse.setGrade(grades.get(x));
+                tempcourse.setUnits(units.get(x));
+
+                tempca[j] = tempcourse;
                 x++;
             }
 
-            Student2 tempStudent = new Student2(sNames.get(j), sIds.get(j), courseList);
-            students[j] = tempStudent;
+            tempstudent.setCourseArr(tempca);
+            allMyStudents[i] = tempstudent;
         }
-        allStudents = students;
-        return students;
+        allStudents = allMyStudents;
     }
 
-    public Student2[] getAllStudents(){
+    void readData()throws IOException{
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a valid file name: ");
+        String fileName = sc.nextLine();
+
+        try{
+            File newFile = new File(fileName);
+            if(!newFile.exists()){
+                System.out.println("File does not exist, exiting... ");
+                System.exit(0);
+            }
+            Scanner inSS = new Scanner(newFile);
+            if(!inSS.hasNext()){
+                System.out.println("no data in file, exiting");
+                System.exit(0);
+            }
+
+            //read data into array
+            while(inSS.hasNext()){
+                //data.add(inSS.nextLine());
+                String next = inSS.nextLine();
+                //populate string arrays
+                if(next.contains(",")){
+                    firstNames.add(next.substring(0, next.indexOf(",")));
+                    lastNames.add(next.substring( next.indexOf(",") + 2 , next.length()));                   
+                    totalSize += 2;
+
+                    ids.add(inSS.nextInt());
+                    int cc = inSS.nextInt();
+                    courseCount.add(cc);
+
+                    for(int i = 0; i < cc ; i++){
+                        inSS.nextLine();
+                        courseNames.add(inSS.nextLine());
+                        grades.add(inSS.next());
+                        units.add(inSS.nextInt());
+                    }
+                }
+
+                if(!inSS.hasNext()){
+                    break;
+                }
+            }
+        }
+        catch(Exception e){
+            System.out.println("IO errors, exiting... ");
+        }
+
+    }
+
+    void print(){
+        Student2[] sarr = getAllStudents();
+        //sarr.setStudentArray();
+        System.out.println("name                ID                  units taken");
+        Course2 c = new Course2();
+        for(int i = 0 ; i < firstNames.size() ; i ++){
+            System.out.printf("%-20s%-20d%-20d", sarr[i].getName(), sarr[i].getId(), c.calcUnitsCompleted(sarr[i]));
+            System.out.println("\n");
+        }
+    }
+
+    ArrayList<String> getLastNames(){
+        return lastNames;
+    }
+    ArrayList<String> getFirstNames(){
+        return firstNames;
+    }
+    ArrayList<String> getCourseNames(){
+        return courseNames;
+    }
+    ArrayList<String> getGrades(){
+        return grades;
+    }
+    ArrayList<Integer> getIds(){
+        return ids;
+    }
+    ArrayList<Integer> getCourseCount(){
+        return courseCount;
+    }
+    ArrayList<Integer> getUnits(){
+        return units;
+    }
+    Student2[] getAllStudents(){
         return allStudents;
     }
+
+    void setName(String n){
+        name = n;
+    }
+    void setId(int myid){
+        id = myid;
+    }
+    void setCourseArr(Course2[] cArr){
+        courses = cArr;
+    }
+
+    String getName(){
+        return name;
+    }
+    int getId(){
+        return id;
+    }
+    Course2[] getCourseArr(){
+        return courses;
+    }
+
+    
     
 }
