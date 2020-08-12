@@ -23,7 +23,7 @@ abstract class Animal{
 
 //test interface
 interface DogInterface{
-    void bark();
-    void poop();
+    void sound();
+    void feed();
 }
 

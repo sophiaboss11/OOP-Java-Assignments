@@ -1,6 +1,6 @@
 //Dog class extends Animal class
 
-public class Dog extends Animal{
+public class Dog implements DogInterface{
     Dog(){ name = "Tito"; }
     public void sound(){ System.out.println("Woof"); }
     public void feed (){  System.out.println("I eat meat.");}
