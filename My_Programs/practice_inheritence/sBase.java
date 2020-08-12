@@ -8,6 +8,7 @@ public class sBase{
     String date = "";
     int casee = 0;
     ArrayList<String> cases = new ArrayList<>();
+    ArrayList<String> dates = new ArrayList<>();
 
     sBase(){};
     sBase(String mydate, int mycase){
@@ -43,6 +44,21 @@ public class sBase{
                 }
             }
 
+            while(inSS.hasNext()){
+                String next = inSS.nextLine();
+
+                if(!next.equals("")){
+                    dates.add(next);
+                }
+                else{
+                    break;
+                }
+
+                if(!inSS.hasNext()){
+                    break;
+                }
+            }
+
         }
         catch(Exception e){
             System.out.println("IO errors, exiting.. ");
@@ -53,9 +69,13 @@ public class sBase{
     public ArrayList<String> getCaseList(){
         return cases;
     }
+    public ArrayList<String> getDatesList(){
+        return dates;
+    }
 
     public void print(){
-        System.out.println("cases: " + Arrays.toString(getCaseList().toArray()));
+        //System.out.println("cases: " + Arrays.toString(getCaseList().toArray()));
+        System.out.println(">");
     }
 
 
